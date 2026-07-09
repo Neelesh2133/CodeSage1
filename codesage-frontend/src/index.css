@@ -1,0 +1,178 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #09090b;
+  --color-ink: #f4f4f5;
+  --color-margin-red: #ef4444;
+  --color-verified-green: #10b981;
+  --color-slate-blue: #3b82f6;
+  --color-hairline: #2f2f35;
+  
+  --color-zinc-950: #0a0a0c;
+  --color-zinc-900: #16161a;
+  --color-zinc-800: #2c2c35;
+  --color-zinc-700: #444452;
+  --color-zinc-400: #bcbcce;
+  --color-zinc-500: #8c8c9e;
+}
+
+:root {
+  --paper: #0a0a0c;
+  --ink: #ffffff;
+  --margin-red: #ef4444;
+  --verified-green: #10b981;
+  --slate-blue: #3b82f6;
+  --hairline: #2c2c35;
+  --panel-bg: #16161a;
+}
+
+body {
+  background-color: #0a0a0c;
+  color: #ffffff;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0c;
+}
+::-webkit-scrollbar-thumb {
+  background: #3e3e4a;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555566;
+}
+
+/* Text Selection and Focus */
+::selection {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+/* Scroll Code Animation */
+@keyframes scroll-code {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes blink-cursor {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-tag {
+  0%, 100% {
+    opacity: 0;
+    transform: translateX(8px) scale(0.97);
+  }
+  15%, 85% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-scroll-code {
+  animation: scroll-code 28s linear infinite;
+}
+
+.animate-blink {
+  animation: blink-cursor 1s step-end infinite;
+}
+
+.animate-fade-tag {
+  animation: fade-tag 6s ease-in-out infinite;
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-toast {
+  animation: toast-in 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-spin-slow {
+  animation: spin 1s linear infinite;
+}
+
+/* Form input styling for maximum visibility */
+.high-contrast-input {
+  background-color: #1b1b22;
+  border: 1px solid #444452;
+  color: #ffffff;
+  transition: all 0.15s ease-in-out;
+}
+
+.high-contrast-input:focus {
+  border-color: #ffffff;
+  box-shadow: 0 0 0 1px #ffffff;
+}
+
+/* Border Beam effect */
+.border-beam-container {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.border-beam-line {
+  position: absolute;
+  inset: 0;
+  border: 1px solid transparent;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: border-beam-anim 4s linear infinite;
+  background-size: 200% 100%;
+}
+
+@keyframes border-beam-anim {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

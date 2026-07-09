@@ -4,7 +4,8 @@ from app.config import settings
 
 client = OpenAI(
     base_url="https://openrouter.ai/api/v1",
-    api_key=settings.openrouter_api_key
+    api_key=settings.openrouter_api_key,
+    timeout=30.0
 )
 
 SYSTEM_PROMPT = """You are a strict senior code reviewer. Analyze the given code and return ONLY a JSON array of findings. No prose, no markdown fences, no explanation — just the raw JSON array.
@@ -34,27 +35,20 @@ def review_code(code: str) -> list[dict]:
     last_raw = ""
     for attempt in range(2):
         response = client.chat.completions.create(
-            model="nvidia/nemotron-3-ultra-550b-a55b:free",
+            model="nvidia/nemotron-3-ultra-550b-a55b",
             messages=[
                 {"role": "system", "content": SYSTEM_PROMPT},
                 {"role": "user", "content": code}
             ],
-            temperature=0.2
+            temperature=0.2,
+            max_tokens=4096
         )
         raw = response.choices[0].message.content.strip()
-        # Models sometimes wrap JSON in ```json fences despite instructions — strip defensively
         raw = raw.removeprefix("```json").removeprefix("```").removesuffix("```").strip()
         try:
             return json.loads(raw)
         except json.JSONDecodeError as e:
             last_error = e
             last_raw = raw
-            # Loops and retries once
 
     raise LLMReviewError(f"LLM returned malformed JSON: {last_error}", last_raw)
-
-client = OpenAI(
-    base_url="https://openrouter.ai/api/v1",
-    api_key=settings.openrouter_api_key,
-    timeout=30.0
-)    

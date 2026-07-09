@@ -2,11 +2,20 @@ import logging
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from app.routers import reviews, auth, webhooks
+from fastapi.middleware.cors import CORSMiddleware
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
 logger = logging.getLogger("codesage")
 
 app = FastAPI(title="CodeSage")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 app.include_router(auth.router)
 app.include_router(reviews.router)
 app.include_router(webhooks.router)
