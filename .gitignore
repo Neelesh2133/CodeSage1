@@ -1,0 +1,20 @@
+# Environment & secrets
+.env
+*.dump
+
+# Python
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+
+# OS/editor
+.vscode/
+.idea/
+.DS_Store
+
+# Temporary/debug files
+check_*.py
+test_fetch.py
+add_head_sha.py

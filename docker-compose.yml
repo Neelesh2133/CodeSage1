@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: codesage-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: yourpassword
+      POSTGRES_DB: codesage
+    ports:
+      - "5433:5432"
+    volumes:
+      - codesage_pgdata:/var/lib/postgresql/data
+
+volumes:
+  codesage_pgdata:
