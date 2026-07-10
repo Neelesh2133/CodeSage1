@@ -19,7 +19,7 @@ def _split_large_unit(label: str, text: str) -> list[tuple[str, str]]:
 def chunk_units(units: list[tuple[str, str]]) -> list[list[tuple[str, str]]]:
     """Groups (label, text) units into chunks, each under MAX_CHUNK_CHARS.
     A single unit larger than the limit gets split into labeled sub-parts first."""
-    expanded = []
+    
     for label, text in units:
         if len(text) > MAX_CHUNK_CHARS:
             expanded.extend(_split_large_unit(label, text))
@@ -33,6 +33,6 @@ def chunk_units(units: list[tuple[str, str]]) -> list[list[tuple[str, str]]]:
             current_chunk, current_len = [], 0
         current_chunk.append((label, text))
         current_len += len(text)
-    if current_chunk:
+    
         chunks.append(current_chunk)
-    return chunks
+    chunks
