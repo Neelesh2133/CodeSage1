@@ -18,7 +18,7 @@ CodeSage is an asynchronous FastAPI web service that automates security, style, 
 - **FastAPI**: Asynchronous Python web framework.
 - **PostgreSQL**: Relational database (with JSONB for structured findings).
 - **SQLAlchemy & Alembic**: Database ORM and schema migration manager.
-- **OpenRouter (OpenAI SDK)**: LLM client (using the free `nvidia/nemotron-3-ultra-550b-a55b` model).
+- **OpenRouter (OpenAI SDK)**: LLM client (using the free `nvidia/nemotron-3-ultra-550b-a55b` llm model).
 - **Docker Compose**: Containerized database setup.
 
 ---
