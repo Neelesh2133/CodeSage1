@@ -40,7 +40,7 @@ def review_code(code: str) -> list[dict]:
                 {"role": "system", "content": SYSTEM_PROMPT},
                 {"role": "user", "content": code}
             ],
-            temperature=0.2,
+            temperature=0.2, #LLM Temperature
             max_tokens=4096
         )
         raw = response.choices[0].message.content.strip()
