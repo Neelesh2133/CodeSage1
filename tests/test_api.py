@@ -11,7 +11,7 @@ def test_signup(client):
     data = response.json()
     assert data["email"] == "testuser@example.com"
     assert "id" in data
-
+#Testing with wrong password
 def test_login_wrong_password(client):
     # Register the user first
     signup_res = client.post(
