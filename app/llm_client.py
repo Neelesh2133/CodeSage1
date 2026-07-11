@@ -35,7 +35,7 @@ def review_code(code: str) -> list[dict]:
     last_raw = ""
     for attempt in range(2):
         response = client.chat.completions.create(
-            model="nvidia/nemotron-3-ultra-550b-a55b",
+            model="nvidia/nemotron-3-ultra-550b-a55b",       #you can use different LLM models from changing the model name here
             messages=[
                 {"role": "system", "content": SYSTEM_PROMPT},
                 {"role": "user", "content": code}
