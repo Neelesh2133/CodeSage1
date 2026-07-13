@@ -6,7 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
 logger = logging.getLogger("codesage")
-
+# GIVING FastAPI() to app
 app = FastAPI(title="CodeSage")
 app.add_middleware(
     CORSMiddleware,
