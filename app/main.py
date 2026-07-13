@@ -8,7 +8,7 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name
 logger = logging.getLogger("codesage")
 # GIVING FastAPI() to app
 app = FastAPI(title="CodeSage")
-app.add_middleware(
+app.add_middleware( #a method used to register code that runs for every single HTTP request and response
     CORSMiddleware,
     allow_origins=["http://localhost:5173"],
     allow_credentials=True,
