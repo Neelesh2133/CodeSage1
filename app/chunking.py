@@ -1,5 +1,5 @@
 CHARS_PER_TOKEN = 4  # rough heuristic — good enough for chunk sizing, not billing
-MAX_CHUNK_TOKENS = 8000
+MAX_CHUNK_TOKENS = 8000 #token limit
 MAX_CHUNK_CHARS = MAX_CHUNK_TOKENS * CHARS_PER_TOKEN
 
 def _split_large_unit(label: str, text: str) -> list[tuple[str, str]]:
