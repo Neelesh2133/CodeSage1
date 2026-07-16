@@ -1,7 +1,7 @@
 import hmac
 import hashlib
 from app.config import settings
-
+#Github webhooks
 def verify_github_signature(payload_body: bytes, signature_header: str | None) -> bool:
     """Verifies GitHub's HMAC-SHA256 webhook signature."""
     if not signature_header or not signature_header.startswith("sha256="):

@@ -2,7 +2,7 @@ from sqlalchemy import Column, Integer, String, Text, DateTime, JSON, ForeignKey
 from sqlalchemy.sql import func
 from app.database import Base
 
-class User(Base):
+class User(Base): #for signup and login info
     __tablename__ = "users"
     id = Column(Integer, primary_key=True)
     email = Column(String, unique=True, index=True, nullable=False)
