@@ -8,14 +8,16 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name
 logger = logging.getLogger("codesage")
 # GIVING FastAPI() to app
 app = FastAPI(title="CodeSage")
-app.add_middleware( #a method used to register code that runs for every single HTTP request and response
+app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        "https://code-sage1.vercel.app",
+        "http://localhost:5173",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 app.include_router(auth.router)
 app.include_router(reviews.router)
 app.include_router(webhooks.router)
