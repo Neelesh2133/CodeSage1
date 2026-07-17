@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
+import { motion, AnimatePresence } from 'framer-motion'
 import client from '../api/client'
 import CodePanel from '../components/CodePanel'
 import { BackgroundPaths } from '../components/ui/background-paths'
@@ -8,6 +9,7 @@ export default function Signup() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
+  const [isPasswordFocused, setIsPasswordFocused] = useState(false)
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
@@ -80,6 +82,25 @@ export default function Signup() {
                   Password (min 8 characters)
                 </label>
                 <div className="relative">
+                  <AnimatePresence>
+                    {isPasswordFocused && password.length > 0 && password.length < 8 && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                        transition={{ duration: 0.15 }}
+                        className="absolute bottom-full left-0 right-0 mb-3 z-50 bg-zinc-900 border border-zinc-800 rounded-lg p-3 shadow-2xl flex items-start gap-2.5 text-[11px] font-sans text-left"
+                      >
+                        <div className="w-5 h-5 rounded bg-amber-600 text-white flex items-center justify-center font-bold text-xs shrink-0 select-none">
+                          !
+                        </div>
+                        <div className="text-zinc-200 leading-normal">
+                          Please lengthen this text to 8 characters or more (you are currently using {password.length} {password.length === 1 ? 'character' : 'characters'}).
+                        </div>
+                        <div className="w-2.5 h-2.5 bg-zinc-900 border-r border-b border-zinc-800 rotate-45 absolute -bottom-[6px] left-10" />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                   <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-zinc-400">
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
@@ -89,6 +110,8 @@ export default function Signup() {
                     type={showPassword ? 'text' : 'password'}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    onFocus={() => setIsPasswordFocused(true)}
+                    onBlur={() => setIsPasswordFocused(false)}
                     required
                     minLength={8}
                     placeholder="••••••••"
